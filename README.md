@@ -68,11 +68,13 @@ llm.py       → GPT API integration
 |------------|--------------------------------|
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
+| `v0.2.1`   | Policy integrated into workflow (default tasks + CEO role reassign) |
 
 Checkout a previous version:
 ```bash
 git checkout v0.1-mvp   # v0.1
 git checkout v0.2      # v0.2
+git checkout v0.2.1    # v0.2.1
 ```
 
 ## Extensions
