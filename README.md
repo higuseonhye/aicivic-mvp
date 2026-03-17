@@ -71,6 +71,7 @@ llm.py       → GPT API integration
 | `v0.2.1`   | Policy integrated into workflow (default tasks + CEO role reassign) |
 | `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE for role selection) |
 | `v0.3.1`   | Smoke test script (`scripts/check.py`) |
+| `v0.4`     | Agent.think() uses OpenClaw when OPENCLAW_API_BASE set; fallback to OpenAI |
 
 Checkout a previous version:
 ```bash
@@ -79,6 +80,7 @@ git checkout v0.2      # v0.2
 git checkout v0.2.1    # v0.2.1
 git checkout v0.3      # v0.3
 git checkout v0.3.1    # v0.3.1
+git checkout v0.4      # v0.4
 ```
 
 ### Smoke tests (no API)
@@ -97,7 +99,8 @@ When running [OpenClaw-RL](https://github.com/Gen-Verse/OpenClaw-RL) (serves Ope
 OPENCLAW_API_BASE=http://localhost:30000/v1 python main.py
 ```
 
-Policy will use OpenClaw for task→role selection; falls back to heuristic if API is unavailable.
+- **Agent.think()** (CEO, Engineer, Marketing, Sales) → OpenClaw; falls back to OpenAI on failure
+- **Policy** (task→role) → OpenClaw; falls back to heuristic if API unavailable
 
 ## Extensions
 
