@@ -11,7 +11,7 @@ def main():
 
     # 1. Imports
     try:
-        from company import Company
+        from company import Company, Market
         from policy import Policy
         from company.planner import parse_plan_tasks, get_default_tasks
         print("1. Imports: OK")
@@ -59,6 +59,15 @@ Sales: Outreach emails
         print("5. Company init: OK")
     except Exception as e:
         errors.append(f"Company init: {e}")
+
+    # 6. Market init
+    try:
+        m = Market()
+        m.add_company("TestCo")
+        assert len(m.companies) == 1
+        print("6. Market init: OK")
+    except Exception as e:
+        errors.append(f"Market init: {e}")
 
     if errors:
         print("\nFAILED:", errors)

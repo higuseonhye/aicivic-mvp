@@ -25,7 +25,12 @@ cp .env.example .env
 ## Run
 
 ```bash
+# Single company
 python main.py
+
+# Multiple companies (market)
+python main.py --market
+python main.py --market "Company A" "Company B"
 ```
 
 ## Output
@@ -53,7 +58,7 @@ python main.py
 ## Structure
 
 ```
-company/     → Company, Organization, roles, planner
+company/     → Company, Organization, Market, roles, planner
 agents/      → Agent (think, memory, shared_memory)
 tasks/       → TaskManager (add_task, run)
 environment/ → Memory (task history)
@@ -69,12 +74,14 @@ llm.py       → GPT API integration
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
 | `v0.5`     | OpenAI + heuristic only |
+| `v0.6`     | Market — multiple companies |
 
 Checkout a previous version:
 ```bash
 git checkout v0.1-mvp
 git checkout v0.2
 git checkout v0.5
+git checkout v0.6
 ```
 
 ### Smoke tests (no API)
@@ -87,4 +94,4 @@ python -m scripts.check
 
 ## Future vision
 
-- **Multiple companies** → markets → economy → AI civilization
+- **Economy** — companies trading, value exchange

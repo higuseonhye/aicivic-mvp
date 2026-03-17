@@ -1,6 +1,27 @@
-"""Run AI company demo."""
-from company import Company
+"""Run AI company demo. Single company or market (multiple companies)."""
+import sys
+from company import Company, Market
 
-if __name__ == "__main__":
+# Default companies for market mode
+DEFAULT_COMPANIES = ["AI SaaS Builder", "AI Analytics Co", "AI Security Inc"]
+
+
+def run_single():
+    """Run single company."""
     company = Company()
     company.run("AI SaaS Builder")
+
+
+def run_market(names=None):
+    """Run multiple companies."""
+    market = Market()
+    for name in names or DEFAULT_COMPANIES:
+        market.add_company(name)
+    market.run_all()
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--market":
+        run_market(sys.argv[2:] if len(sys.argv) > 2 else None)
+    else:
+        run_single()
