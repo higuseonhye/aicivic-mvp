@@ -1,6 +1,9 @@
 """Run AI company demo. Single company or market (multiple companies)."""
+import logging
 import sys
 from company import Company, Market
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 # Default companies for market mode
 DEFAULT_COMPANIES = ["AI SaaS Builder", "AI Analytics Co", "AI Security Inc"]

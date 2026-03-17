@@ -80,10 +80,14 @@ Each run shows total cost and tokens at the end.
 
 ### Tools (optional)
 
-AI workspace only. Use dedicated Notion DB and Slack channel (e.g. `#ai-agents`).
+**Notion** — DB schema required: `Company` (Title), `Role` (Text), `Task` (Text)
 
-- **Notion**: `AI_NOTION_API_KEY`, `AI_NOTION_DATABASE_ID`
-- **Slack**: `AI_SLACK_BOT_TOKEN`, `AI_SLACK_CHANNEL`
+- `AI_NOTION_API_KEY`, `AI_NOTION_DATABASE_ID`
+
+**Slack** — company channels + role formatting
+
+- `AI_SLACK_BOT_TOKEN`, `AI_SLACK_CHANNEL` (default, e.g. `#ai-agents`)
+- `AI_SLACK_USE_COMPANY_CHANNELS=true` — auto-create `#ai-{company-slug}` per company. **Required scopes:** `channels:manage`, `channels:read`, `channels:join` (OAuth & Permissions → Add scope → Reinstall)
 
 When human company is added, env vars can be split (e.g. `AI_*` vs `HUMAN_*`).
 
@@ -96,6 +100,7 @@ When human company is added, env vars can be split (e.g. `AI_*` vs `HUMAN_*`).
 | `v0.5`     | OpenAI + heuristic only |
 | `v0.6`     | Market — multiple companies |
 | `v0.7`     | Cost tracking, Tools (Notion/Slack), Streamlit frontend |
+| `v0.8`     | AI workspace env vars, Slack auto-create channels, Notion error logging, test_slack.py |
 
 Checkout a previous version:
 ```bash
@@ -104,7 +109,16 @@ git checkout v0.2
 git checkout v0.5
 git checkout v0.6
 git checkout v0.7
+git checkout v0.8
 ```
+
+### Test Slack setup
+
+```bash
+python scripts/test_slack.py
+```
+
+Verifies token, default channel post, and channel create/join. If `missing_scope`, add `channels:manage`, `channels:read`, `channels:join` and reinstall the app.
 
 ### Smoke tests (no API)
 

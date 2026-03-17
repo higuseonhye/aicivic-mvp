@@ -23,6 +23,9 @@ def agent_action(role: str, action: str):
     print(f"{color}[{role}]{RESET} {action}")
 
 
-def agent_result(role: str, result: str, max_len: int = 300):
-    preview = result[:max_len] + "..." if len(result) > max_len else result
-    print(f"{DIM}{preview}{RESET}\n")
+def agent_result(role: str, result: str, max_len: int = None):
+    if max_len:
+        text = result[:max_len] + ("..." if len(result) > max_len else "")
+    else:
+        text = result
+    print(f"{DIM}{text}{RESET}\n")

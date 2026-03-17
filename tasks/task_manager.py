@@ -21,6 +21,6 @@ class TaskManager:
             for tool in tools:
                 tool.execute(company_name, agent.role, task, result)
             if console_format:
-                agent_result(agent.role, result, max_len=300)
+                agent_result(agent.role, result)
             else:
-                print(f"[{agent.role}] {result[:200]}{'...' if len(result) > 200 else ''}\n")
+                print(f"[{agent.role}] {result}\n")

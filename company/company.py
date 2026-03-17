@@ -10,13 +10,23 @@ from .planner import parse_plan_tasks, get_default_tasks
 
 
 def _default_tools():
-    from config import AI_NOTION_API_KEY, AI_NOTION_DATABASE_ID, AI_SLACK_BOT_TOKEN, AI_SLACK_CHANNEL
+    from config import (
+        AI_NOTION_API_KEY,
+        AI_NOTION_DATABASE_ID,
+        AI_SLACK_BOT_TOKEN,
+        AI_SLACK_CHANNEL,
+        AI_SLACK_USE_COMPANY_CHANNELS,
+    )
     from tools import NotionTool, SlackTool
     tools = []
     if AI_NOTION_API_KEY and AI_NOTION_DATABASE_ID:
         tools.append(NotionTool(AI_NOTION_API_KEY, AI_NOTION_DATABASE_ID))
     if AI_SLACK_BOT_TOKEN and AI_SLACK_CHANNEL:
-        tools.append(SlackTool(AI_SLACK_BOT_TOKEN, AI_SLACK_CHANNEL))
+        tools.append(SlackTool(
+            AI_SLACK_BOT_TOKEN,
+            AI_SLACK_CHANNEL,
+            use_company_channels=AI_SLACK_USE_COMPANY_CHANNELS,
+        ))
     return tools
 
 
@@ -47,7 +57,7 @@ class Company:
             "Marketing: Create landing page copy"
         )
         plan = self.org.ceo.think(plan_prompt)
-        agent_result("CEO", plan, max_len=400)
+        agent_result("CEO", plan)
 
         # 2. Parse plan → tasks (fallback: Policy assigns roles)
         tasks = parse_plan_tasks(plan)
