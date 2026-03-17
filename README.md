@@ -68,16 +68,12 @@ llm.py       → GPT API integration
 |------------|--------------------------------|
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
-| `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE) |
-| `v0.4`     | Agent.think() uses OpenClaw; fallback to OpenAI |
-| `v0.5`     | Remove OpenClaw; OpenAI + heuristic only |
+| `v0.5`     | OpenAI + heuristic only |
 
 Checkout a previous version:
 ```bash
 git checkout v0.1-mvp
 git checkout v0.2
-git checkout v0.3
-git checkout v0.4
 git checkout v0.5
 ```
 
