@@ -41,7 +41,7 @@ class Policy:
         """Call OpenClaw-RL OpenAI-compatible API for role selection."""
         try:
             from openai import OpenAI
-            client = OpenAI(base_url=self._openclaw_base, api_key="openclaw")
+            client = OpenAI(base_url=self._openclaw_base, api_key="openclaw", timeout=5)
             resp = client.chat.completions.create(
                 model="openclaw",
                 messages=[{

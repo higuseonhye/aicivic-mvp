@@ -26,7 +26,7 @@ def _call_openai(prompt: str, model: str) -> str:
 def _call_openclaw(prompt: str, model: str):
     """OpenClaw-RL API (OpenAI-compatible). Returns None on failure."""
     try:
-        client = OpenAI(base_url=OPENCLAW_API_BASE, api_key="openclaw")
+        client = OpenAI(base_url=OPENCLAW_API_BASE, api_key="openclaw", timeout=5)
         response = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
