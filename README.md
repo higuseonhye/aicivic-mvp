@@ -72,6 +72,7 @@ llm.py       → GPT API integration
 | `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE for role selection) |
 | `v0.3.1`   | Smoke test script (`scripts/check.py`) |
 | `v0.4`     | Agent.think() uses OpenClaw when OPENCLAW_API_BASE set; fallback to OpenAI |
+| `v0.4.1`   | Docs: Windows PowerShell env var syntax |
 
 Checkout a previous version:
 ```bash
@@ -81,6 +82,7 @@ git checkout v0.2.1    # v0.2.1
 git checkout v0.3      # v0.3
 git checkout v0.3.1    # v0.3.1
 git checkout v0.4      # v0.4
+git checkout v0.4.1    # v0.4.1
 ```
 
 ### Smoke tests (no API)
