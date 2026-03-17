@@ -1,10 +1,6 @@
 """Smoke tests - no API required. Run: python scripts/check.py or python -m scripts.check"""
-import os
 import sys
 from pathlib import Path
-
-# Smoke test uses heuristic only (no OpenClaw/OpenAI calls)
-os.environ["OPENCLAW_API_BASE"] = ""
 
 # Ensure project root is on path when run as scripts/check.py
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))

@@ -57,7 +57,7 @@ company/     → Company, Organization, roles, planner
 agents/      → Agent (think, memory, shared_memory)
 tasks/       → TaskManager (add_task, run)
 environment/ → Memory (task history)
-policy.py    → Policy (heuristic / OpenClaw-RL API when configured)
+policy.py    → Policy (heuristic task→role)
 console.py   → Formatted output
 llm.py       → GPT API integration
 ```
@@ -70,6 +70,7 @@ llm.py       → GPT API integration
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
 | `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE) |
 | `v0.4`     | Agent.think() uses OpenClaw; fallback to OpenAI |
+| `v0.5`     | Remove OpenClaw; OpenAI + heuristic only |
 
 Checkout a previous version:
 ```bash
@@ -77,6 +78,7 @@ git checkout v0.1-mvp
 git checkout v0.2
 git checkout v0.3
 git checkout v0.4
+git checkout v0.5
 ```
 
 ### Smoke tests (no API)
@@ -87,25 +89,8 @@ python scripts/check.py
 python -m scripts.check
 ```
 
-### OpenClaw-RL integration
-
-When running [OpenClaw-RL](https://github.com/Gen-Verse/OpenClaw-RL) (serves OpenAI-compatible API on port 30000):
-
-```bash
-# Linux / macOS / Git Bash
-OPENCLAW_API_BASE=http://localhost:30000/v1 python main.py
-
-# Windows PowerShell
-$env:OPENCLAW_API_BASE="http://localhost:30000/v1"; python main.py
-
-# Or add to .env file (works on all platforms)
-```
-
-- **Agent.think()** (CEO, Engineer, Marketing, Sales) → OpenClaw; falls back to OpenAI on failure
-- **Policy** (task→role) → OpenClaw; falls back to heuristic if API unavailable
-
 ## Extensions
 
 - **Memory**: `environment/memory.py` — task history
-- **Policy**: `policy.py` — heuristic by default; uses OpenClaw-RL API when `OPENCLAW_API_BASE` is set
+- **Policy**: `policy.py` — heuristic task→role
 - **Multiple companies** → markets → economy → AI civilization
