@@ -96,7 +96,13 @@ python -m scripts.check
 When running [OpenClaw-RL](https://github.com/Gen-Verse/OpenClaw-RL) (serves OpenAI-compatible API on port 30000):
 
 ```bash
+# Linux / macOS / Git Bash
 OPENCLAW_API_BASE=http://localhost:30000/v1 python main.py
+
+# Windows PowerShell
+$env:OPENCLAW_API_BASE="http://localhost:30000/v1"; python main.py
+
+# Or add to .env file (works on all platforms)
 ```
 
 - **Agent.think()** (CEO, Engineer, Marketing, Sales) → OpenClaw; falls back to OpenAI on failure
