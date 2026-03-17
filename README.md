@@ -68,21 +68,15 @@ llm.py       → GPT API integration
 |------------|--------------------------------|
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
-| `v0.2.1`   | Policy integrated into workflow (default tasks + CEO role reassign) |
-| `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE for role selection) |
-| `v0.3.1`   | Smoke test script (`scripts/check.py`) |
-| `v0.4`     | Agent.think() uses OpenClaw when OPENCLAW_API_BASE set; fallback to OpenAI |
-| `v0.4.1`   | Docs: Windows PowerShell env var syntax |
+| `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE) |
+| `v0.4`     | Agent.think() uses OpenClaw; fallback to OpenAI |
 
 Checkout a previous version:
 ```bash
-git checkout v0.1-mvp   # v0.1
-git checkout v0.2      # v0.2
-git checkout v0.2.1    # v0.2.1
-git checkout v0.3      # v0.3
-git checkout v0.3.1    # v0.3.1
-git checkout v0.4      # v0.4
-git checkout v0.4.1    # v0.4.1
+git checkout v0.1-mvp
+git checkout v0.2
+git checkout v0.3
+git checkout v0.4
 ```
 
 ### Smoke tests (no API)
