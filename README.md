@@ -69,7 +69,7 @@ llm.py       → GPT API integration
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
 
-이전 버전으로 되돌리기:
+Checkout a previous version:
 ```bash
 git checkout v0.1-mvp   # v0.1
 git checkout v0.2      # v0.2
