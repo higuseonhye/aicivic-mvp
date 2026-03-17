@@ -28,7 +28,7 @@ Task: {task}
 
 Respond with your output directly. Be concise.
 """
-        result = llm(prompt)
+        result = llm(prompt, role=self.role, task=task)
         self.memory.append({"task": task, "result": result})
         if self.shared_memory:
             self.shared_memory.add(self.role, task, result)

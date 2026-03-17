@@ -2,18 +2,35 @@
 from tasks import TaskManager
 from environment import Memory
 from policy import Policy
+from cost import CostTracker
+from llm import set_cost_tracker
 from console import section, agent_action, agent_result
 from .organization import Organization
 from .planner import parse_plan_tasks, get_default_tasks
 
 
+def _default_tools():
+    from config import NOTION_API_KEY, NOTION_DATABASE_ID, SLACK_BOT_TOKEN, SLACK_CHANNEL
+    from tools import NotionTool, SlackTool
+    tools = []
+    if NOTION_API_KEY and NOTION_DATABASE_ID:
+        tools.append(NotionTool(NOTION_API_KEY, NOTION_DATABASE_ID))
+    if SLACK_BOT_TOKEN and SLACK_CHANNEL:
+        tools.append(SlackTool(SLACK_BOT_TOKEN, SLACK_CHANNEL))
+    return tools
+
+
 class Company:
-    def __init__(self):
+    def __init__(self, tools=None):
         self.memory = Memory()
         self.policy = Policy()
+        self.cost_tracker = CostTracker()
+        self.tools = tools if tools is not None else _default_tools()
         self.org = Organization(shared_memory=self.memory)
 
     def run(self, company_name: str = "AI SaaS Builder"):
+        self.cost_tracker.set_company(company_name)
+        set_cost_tracker(self.cost_tracker)
         section(f"Creating company: {company_name}")
 
         # 1. CEO creates plan
@@ -51,6 +68,8 @@ class Company:
 
         # 4. Execute
         section("Executing tasks")
-        tm.run(console_format=True)
+        tm.run(console_format=True, company_name=company_name, tools=self.tools)
 
         section("AI Company workflow complete")
+        if self.cost_tracker.records:
+            agent_action("Cost", f"${self.cost_tracker.total_cost_usd:.4f} ({self.cost_tracker.total_tokens} tokens)")
