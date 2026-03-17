@@ -53,12 +53,26 @@ python main.py
 ## Structure
 
 ```
-company/     → Company, Organization, roles
-agents/      → Agent (think, memory)
+company/     → Company, Organization, roles, planner
+agents/      → Agent (think, memory, shared_memory)
 tasks/       → TaskManager (add_task, run)
 environment/ → Memory (task history)
-policy.py    → Policy stub (→ OpenClaw RL later)
+policy.py    → Policy (choose_role_for_task, → OpenClaw RL)
+console.py   → Formatted output
 llm.py       → GPT API integration
+```
+
+## Versions
+
+| Tag        | Description                    |
+|------------|--------------------------------|
+| `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
+| `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
+
+이전 버전으로 되돌리기:
+```bash
+git checkout v0.1-mvp   # v0.1
+git checkout v0.2      # v0.2
 ```
 
 ## Extensions

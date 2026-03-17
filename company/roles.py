@@ -10,6 +10,6 @@ ROLES = {
 }
 
 
-def create_agent(role_key: str) -> Agent:
+def create_agent(role_key: str, shared_memory=None) -> Agent:
     role, goal = ROLES[role_key]
-    return Agent(role, goal, [])
+    return Agent(role, goal, [], shared_memory)

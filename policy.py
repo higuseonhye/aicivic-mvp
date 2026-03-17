@@ -1,10 +1,26 @@
-"""Policy stub - replace with OpenClaw RL later."""
-import random
+"""Policy - task assignment logic. Replace with OpenClaw RL later."""
 from typing import List, Any
 
 
 class Policy:
-    """Placeholder for future RL-based policy."""
+    """Heuristic task assignment. Extensible to RL."""
+
+    ROLE_KEYWORDS = {
+        "Engineer": ["build", "api", "code", "backend", "frontend", "documentation", "implement"],
+        "Marketing": ["landing", "page", "copy", "promote", "content", "brand", "value prop"],
+        "Sales": ["outreach", "email", "sell", "pitch", "lead", "cold", "template"],
+    }
 
     def choose_action(self, options: List[Any]) -> Any:
-        return random.choice(options)
+        """Fallback: first option."""
+        return options[0] if options else None
+
+    def choose_role_for_task(self, task: str) -> str:
+        """Pick best role for task based on keywords."""
+        task_lower = task.lower()
+        best_role, best_score = "Engineer", 0
+        for role, keywords in self.ROLE_KEYWORDS.items():
+            score = sum(1 for k in keywords if k in task_lower)
+            if score > best_score:
+                best_score, best_role = score, role
+        return best_role

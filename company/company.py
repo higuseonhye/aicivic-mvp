@@ -1,31 +1,50 @@
 """Company - runs AI company workflow."""
 from tasks import TaskManager
+from environment import Memory
+from policy import Policy
+from console import section, agent_action, agent_result
 from .organization import Organization
+from .planner import parse_plan_tasks, get_default_tasks
 
 
 class Company:
     def __init__(self):
-        self.org = Organization()
+        self.memory = Memory()
+        self.policy = Policy()
+        self.org = Organization(shared_memory=self.memory)
 
     def run(self, company_name: str = "AI SaaS Builder"):
-        print(f"=== Creating company: {company_name} ===\n")
+        section(f"Creating company: {company_name}")
 
         # 1. CEO creates plan
-        print("[CEO] defining strategy...")
-        plan = self.org.ceo.think(
+        agent_action("CEO", "defining strategy...")
+        plan_prompt = (
             f"We need to build an AI SaaS product called '{company_name}'. "
-            "Create a concise execution plan with tasks for engineers, marketing, and sales."
+            "Create a concise execution plan. "
+            "Then list tasks in this format (one per line):\n"
+            "Engineer: <task>\n"
+            "Marketing: <task>\n"
+            "Sales: <task>\n"
+            "Example:\n"
+            "Engineer: Build FastAPI backend\n"
+            "Marketing: Create landing page copy"
         )
-        print(f"[CEO] {plan[:300]}...\n")
+        plan = self.org.ceo.think(plan_prompt)
+        agent_result("CEO", plan, max_len=400)
 
-        # 2. Task breakdown & assignment
+        # 2. Parse plan → tasks (fallback to defaults if parse fails)
+        tasks = parse_plan_tasks(plan)
+        if not tasks:
+            tasks = get_default_tasks(company_name)
+
+        # 3. Assign tasks via Policy (role from plan or heuristic)
         tm = TaskManager()
-        tm.add_task(self.org.engineers[0], "Build FastAPI backend with core API endpoints")
-        tm.add_task(self.org.engineers[1], "Write API documentation and code structure")
-        tm.add_task(self.org.marketing, "Create landing page copy and value proposition")
-        tm.add_task(self.org.sales, "Write 3 outreach email templates for cold outreach")
+        for role, task in tasks:
+            agent = self.org.get_agent_by_role(role)
+            tm.add_task(agent, task)
 
-        print("=== Executing tasks ===\n")
-        tm.run()
+        # 4. Execute
+        section("Executing tasks")
+        tm.run(console_format=True)
 
-        print("=== AI Company workflow complete ===")
+        section("AI Company workflow complete")
