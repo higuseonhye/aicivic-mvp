@@ -10,13 +10,13 @@ from .planner import parse_plan_tasks, get_default_tasks
 
 
 def _default_tools():
-    from config import NOTION_API_KEY, NOTION_DATABASE_ID, SLACK_BOT_TOKEN, SLACK_CHANNEL
+    from config import AI_NOTION_API_KEY, AI_NOTION_DATABASE_ID, AI_SLACK_BOT_TOKEN, AI_SLACK_CHANNEL
     from tools import NotionTool, SlackTool
     tools = []
-    if NOTION_API_KEY and NOTION_DATABASE_ID:
-        tools.append(NotionTool(NOTION_API_KEY, NOTION_DATABASE_ID))
-    if SLACK_BOT_TOKEN and SLACK_CHANNEL:
-        tools.append(SlackTool(SLACK_BOT_TOKEN, SLACK_CHANNEL))
+    if AI_NOTION_API_KEY and AI_NOTION_DATABASE_ID:
+        tools.append(NotionTool(AI_NOTION_API_KEY, AI_NOTION_DATABASE_ID))
+    if AI_SLACK_BOT_TOKEN and AI_SLACK_CHANNEL:
+        tools.append(SlackTool(AI_SLACK_BOT_TOKEN, AI_SLACK_CHANNEL))
     return tools
 
 

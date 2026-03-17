@@ -80,8 +80,12 @@ Each run shows total cost and tokens at the end.
 
 ### Tools (optional)
 
-- **Notion**: Create pages per company/role/task. Set `NOTION_API_KEY`, `NOTION_DATABASE_ID`.
-- **Slack**: Post agent output to channel. Set `SLACK_BOT_TOKEN`, `SLACK_CHANNEL`.
+AI workspace only. Use dedicated Notion DB and Slack channel (e.g. `#ai-agents`).
+
+- **Notion**: `AI_NOTION_API_KEY`, `AI_NOTION_DATABASE_ID`
+- **Slack**: `AI_SLACK_BOT_TOKEN`, `AI_SLACK_CHANNEL`
+
+When human company is added, env vars can be split (e.g. `AI_*` vs `HUMAN_*`).
 
 ## Versions
 

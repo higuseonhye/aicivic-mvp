@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-NOTION_API_KEY = os.getenv("NOTION_API_KEY", "")
-NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID", "")
-SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN", "")
-SLACK_CHANNEL = os.getenv("SLACK_CHANNEL", "")
+
+# AI workspace only. When human company is added, use AI_* vs HUMAN_* for separation.
+AI_NOTION_API_KEY = os.getenv("AI_NOTION_API_KEY", "")
+AI_NOTION_DATABASE_ID = os.getenv("AI_NOTION_DATABASE_ID", "")
+AI_SLACK_BOT_TOKEN = os.getenv("AI_SLACK_BOT_TOKEN", "")
+AI_SLACK_CHANNEL = os.getenv("AI_SLACK_CHANNEL", "")
