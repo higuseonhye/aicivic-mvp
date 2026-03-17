@@ -32,12 +32,18 @@ class Company:
         plan = self.org.ceo.think(plan_prompt)
         agent_result("CEO", plan, max_len=400)
 
-        # 2. Parse plan → tasks (fallback to defaults if parse fails)
+        # 2. Parse plan → tasks (fallback: Policy assigns roles)
         tasks = parse_plan_tasks(plan)
         if not tasks:
             tasks = get_default_tasks(company_name)
+        else:
+            # Use Policy for tasks with unclear role (e.g. "CEO" parsed → reassign)
+            tasks = [
+                (role if role != "CEO" else self.policy.choose_role_for_task(task), task)
+                for role, task in tasks
+            ]
 
-        # 3. Assign tasks via Policy (role from plan or heuristic)
+        # 3. Assign tasks to agents
         tm = TaskManager()
         for role, task in tasks:
             agent = self.org.get_agent_by_role(role)

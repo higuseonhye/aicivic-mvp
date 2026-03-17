@@ -1,7 +1,6 @@
 """CEO plan parsing - extract tasks from plan output."""
 import re
 from typing import List, Tuple
-from agents import Agent
 
 
 def parse_plan_tasks(plan_text: str) -> List[Tuple[str, str]]:
@@ -27,10 +26,13 @@ def parse_plan_tasks(plan_text: str) -> List[Tuple[str, str]]:
 
 
 def get_default_tasks(company_name: str) -> List[Tuple[str, str]]:
-    """Fallback tasks when parsing fails."""
-    return [
-        ("Engineer", f"Build FastAPI backend for {company_name}"),
-        ("Engineer", "Write API documentation"),
-        ("Marketing", "Create landing page copy and value proposition"),
-        ("Sales", "Write 3 outreach email templates for cold outreach"),
+    """Fallback tasks when parsing fails. Returns (role, task) - role from Policy."""
+    from policy import Policy
+    policy = Policy()
+    tasks_raw = [
+        f"Build FastAPI backend for {company_name}",
+        "Write API documentation",
+        "Create landing page copy and value proposition",
+        "Write 3 outreach email templates for cold outreach",
     ]
+    return [(policy.choose_role_for_task(t), t) for t in tasks_raw]
