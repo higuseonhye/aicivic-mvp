@@ -97,18 +97,14 @@ When human company is added, env vars can be split (e.g. `AI_*` vs `HUMAN_*`).
 |------------|--------------------------------|
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
-| `v0.5`     | OpenAI + heuristic only |
 | `v0.6`     | Market — multiple companies |
-| `v0.7`     | Cost tracking, Tools (Notion/Slack), Streamlit frontend |
-| `v0.8`     | AI workspace env vars, Slack auto-create channels, Notion error logging, test_slack.py |
+| `v0.8`     | Cost tracking, Tools (Notion/Slack), Streamlit, AI workspace, Slack auto-create channels |
 
 Checkout a previous version:
 ```bash
 git checkout v0.1-mvp
 git checkout v0.2
-git checkout v0.5
 git checkout v0.6
-git checkout v0.7
 git checkout v0.8
 ```
 
