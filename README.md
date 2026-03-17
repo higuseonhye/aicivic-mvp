@@ -57,7 +57,7 @@ company/     → Company, Organization, roles, planner
 agents/      → Agent (think, memory, shared_memory)
 tasks/       → TaskManager (add_task, run)
 environment/ → Memory (task history)
-policy.py    → Policy (choose_role_for_task, → OpenClaw RL)
+policy.py    → Policy (heuristic / OpenClaw-RL API when configured)
 console.py   → Formatted output
 llm.py       → GPT API integration
 ```
@@ -69,16 +69,28 @@ llm.py       → GPT API integration
 | `v0.1-mvp` | Initial MVP — agents, roles, task manager, organization |
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
 | `v0.2.1`   | Policy integrated into workflow (default tasks + CEO role reassign) |
+| `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE for role selection) |
 
 Checkout a previous version:
 ```bash
 git checkout v0.1-mvp   # v0.1
 git checkout v0.2      # v0.2
 git checkout v0.2.1    # v0.2.1
+git checkout v0.3      # v0.3
 ```
+
+### OpenClaw-RL integration
+
+When running [OpenClaw-RL](https://github.com/Gen-Verse/OpenClaw-RL) (serves OpenAI-compatible API on port 30000):
+
+```bash
+OPENCLAW_API_BASE=http://localhost:30000/v1 python main.py
+```
+
+Policy will use OpenClaw for task→role selection; falls back to heuristic if API is unavailable.
 
 ## Extensions
 
 - **Memory**: `environment/memory.py` — task history
-- **Policy**: `policy.py` — replace with OpenClaw RL for action selection
+- **Policy**: `policy.py` — heuristic by default; uses OpenClaw-RL API when `OPENCLAW_API_BASE` is set
 - **Multiple companies** → markets → economy → AI civilization
