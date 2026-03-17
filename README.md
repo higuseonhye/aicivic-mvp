@@ -85,8 +85,6 @@ python scripts/check.py
 python -m scripts.check
 ```
 
-## Extensions
+## Future vision
 
-- **Memory**: `environment/memory.py` — task history
-- **Policy**: `policy.py` — heuristic task→role
 - **Multiple companies** → markets → economy → AI civilization
