@@ -70,6 +70,7 @@ llm.py       → GPT API integration
 | `v0.2`     | CEO plan → auto task breakdown, Memory, Policy, console formatting |
 | `v0.2.1`   | Policy integrated into workflow (default tasks + CEO role reassign) |
 | `v0.3`     | OpenClaw-RL compatible Policy (OPENCLAW_API_BASE for role selection) |
+| `v0.3.1`   | Smoke test script (`scripts/check.py`) |
 
 Checkout a previous version:
 ```bash
@@ -77,6 +78,15 @@ git checkout v0.1-mvp   # v0.1
 git checkout v0.2      # v0.2
 git checkout v0.2.1    # v0.2.1
 git checkout v0.3      # v0.3
+git checkout v0.3.1    # v0.3.1
+```
+
+### Smoke tests (no API)
+
+```bash
+python scripts/check.py
+# or
+python -m scripts.check
 ```
 
 ### OpenClaw-RL integration
